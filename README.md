@@ -1,3 +1,3 @@
 # Messeji-Track-And-message
 
-![Algorithm schema](./images/schema.jpg)
+![Algorithm schema](./sr/asset/chat.png)
