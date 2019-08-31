@@ -61,7 +61,6 @@ class Register extends Component {
                         avatar: 'https://theshonet-assets.s3.ap-southeast-1.amazonaws.com/filemanager/shared/22fb0cee_Untitled%20design%28232%29.jpg',
                         latitude: this.state.latitude,
                         longitude: this.state.longitude,
-                        id: response.user.uid
                     })
                     this.setState({
                         fullname: '',

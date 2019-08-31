@@ -2,19 +2,18 @@ import React, { Component } from 'react'
 import { StyleSheet, AsyncStorage as storage } from 'react-native'
 import { GiftedChat } from 'react-native-gifted-chat'
 import { Header, Left, Icon, Body, Thumbnail, Button, Title, Subtitle } from 'native-base';
-import MarqueeText from 'react-native-marquee'
 import { Database, Auth } from '../public/config/db'
 
-export class Chat extends Component {
+export class ChatRoom extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             messages: [],
-            datauser: this.props.navigation.getParam('data'),
             text: '',
             avatar: '',
-            fullname: ''
+            fullname: '',
+            datauser: this.props.navigation.getParam('data'),
         }
 
         storage.getItem('avatar', (err, result) => {
@@ -35,8 +34,6 @@ export class Chat extends Component {
     }
 
     componentWillMount() {
-        console.warn('uid1', Auth.currentUser.uid)
-        console.warn('uid2', this.state.datauser.id)
         Database.ref('messages').child(Auth.currentUser.uid).child(this.state.datauser.id)
             .on('child_added', (value) => {
                 this.setState((prevState) => {
@@ -47,13 +44,13 @@ export class Chat extends Component {
             })
     }
 
-    onSend = () => {
+    Sending = () => {
 
         if (this.state.text.length > 0) {
-            let msgId = Database.ref('messages').child(Auth.currentUser.uid).child(this.state.datauser.id).push().key
+            let idMessage = Database.ref('messages').child(Auth.currentUser.uid).child(this.state.datauser.id).push().key
             let updates = {}
             let message = {
-                _id: msgId,
+                _id: idMessage,
                 text: this.state.text,
                 createdAt: new Date(),
                 user: {
@@ -62,10 +59,8 @@ export class Chat extends Component {
                     avatar: this.state.avatar
                 }
             }
-
-            updates['messages/' + Auth.currentUser.uid + '/' + this.state.datauser.id + '/' + msgId] = message
-            updates['messages/' + this.state.datauser.id + '/' + Auth.currentUser.uid + '/' + msgId] = message
-
+            updates['messages/' + Auth.currentUser.uid + '/' + this.state.datauser.id + '/' + idMessage] = message
+            updates['messages/' + this.state.datauser.id + '/' + Auth.currentUser.uid + '/' + idMessage] = message
             Database.ref().update(updates)
             this.setState({ text: '' })
         }
@@ -73,7 +68,6 @@ export class Chat extends Component {
 
     render() {
         const { datauser } = this.state
-        console.warn(datauser)
         return (
             <>
                 <Header style={{ backgroundColor: '#89216B' }}>
@@ -89,16 +83,7 @@ export class Chat extends Component {
                         <Thumbnail source={{ uri: datauser.avatar }} rounded style={styles.avatar} />
                     </Body>
                     <Body style={{ marginLeft: -60, width: 500 }}>
-                        <MarqueeText
-                            style={{ fontSize: 24 }}
-                            duration={3000}
-                            marqueeOnStart
-                            loop
-                            marqueeDelay={1000}
-                            marqueeResetDelay={1000}
-                        >
                             <Title>{datauser.fullname}</Title>
-                        </MarqueeText>
                         <Subtitle>{datauser.status}</Subtitle>
                     </Body>
                 </Header>
@@ -132,4 +117,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Chat
+export default ChatRoom

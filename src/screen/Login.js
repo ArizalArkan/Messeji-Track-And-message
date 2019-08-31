@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Text, View, Image, Button, TouchableOpacity, StyleSheet, Platform, StatusBar, AsyncStorage } from 'react-native'
-import { Thumbnail,Content, Form, Item, Input, Label, Icon } from 'native-base'
+import { Form, Item, Input, Label, Icon } from 'native-base'
 import  LinearGradient from 'react-native-linear-gradient'
 import GetLocation from 'react-native-get-location'
 import { Database, Auth } from '../public/config/db'
@@ -34,7 +34,6 @@ class Login extends Component {
             })
             .catch(error => {
                 const { code, message } = error
-                console.warn(code, message)
             })
     }
 
@@ -45,7 +44,6 @@ class Login extends Component {
         } else {
             Database.ref('/user').orderByChild('email').equalTo(email).once('value', (result) => {
                 let data = result.val()
-                console.warn("datanya: ", data)
 
                 if (data !== null) {
                     let users = Object.values(data)
@@ -53,7 +51,7 @@ class Login extends Component {
                     AsyncStorage.setItem('email', users[0].email)
                     AsyncStorage.setItem('fullname', users[0].fullname)
                     AsyncStorage.setItem('avatar', users[0].avatar)
-                    console.warn("datapribadi", users[0])
+                    
                 }
             })
 
