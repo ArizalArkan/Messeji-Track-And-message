@@ -50,5 +50,5 @@ Chat and track your friend realtime with Messeji App!
 
 ## Release APK
 <a href="https://www.dropbox.com/s/9v3yp688phivev4/app-release.apk?dl=0">
-  <img src="https://img.shields.io/badge/Download%20on%20the-dropbox-blue.svg?style=popout&logo="/>
+  <img src="https://img.shields.io/badge/Download%20on%20the-Dropbox-blue.svg?style=popout&logo="/>
 </a>
