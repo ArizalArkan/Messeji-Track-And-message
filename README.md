@@ -12,7 +12,7 @@
 - [Usage](#usage-for-development)
 - [Screenshots](#screenshots)
 - [Release APK](#release-apk)
-- [Related Project](#related-project-backend)
+- [License](#License)
 
 ## Introduction
 Chat and track your friend realtime with Messeji App!
@@ -52,3 +52,6 @@ Chat and track your friend realtime with Messeji App!
 <a href="https://www.dropbox.com/s/9v3yp688phivev4/app-release.apk?dl=0">
   <img src="https://img.shields.io/badge/Download%20on%20the-Dropbox-blue.svg?style=popout&logo="/>
 </a>
+
+## License
+Arizal Arkan
